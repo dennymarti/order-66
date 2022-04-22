@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 21. Apr 2022 um 16:57
+-- Erstellungszeit: 22. Apr 2022 um 10:15
 -- Server-Version: 10.4.24-MariaDB
 -- PHP-Version: 8.1.4
 
@@ -20,74 +20,65 @@ USE `order66`;
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `bestellung`
+-- Tabellenstruktur für Tabelle `bread`
 --
 
-DROP TABLE IF EXISTS `bestellung`;
-CREATE TABLE IF NOT EXISTS `bestellung` (
-  `id` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `brotId` int(11) NOT NULL,
-  `laengeId` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  KEY `brotId` (`brotId`),
-  KEY `laengeId` (`laengeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `bestellung_topping`
---
-
-DROP TABLE IF EXISTS `bestellung_topping`;
-CREATE TABLE IF NOT EXISTS `bestellung_topping` (
-  `bestellungId` int(11) NOT NULL,
-  `toppingId` int(11) NOT NULL,
-  PRIMARY KEY (`bestellungId`,`toppingId`),
-  KEY `toppingId` (`toppingId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `brot`
---
-
-DROP TABLE IF EXISTS `brot`;
-CREATE TABLE IF NOT EXISTS `brot` (
+DROP TABLE IF EXISTS `bread`;
+CREATE TABLE `bread` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `preis` float NOT NULL,
-  PRIMARY KEY (`id`)
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `kategorie`
+-- Tabellenstruktur für Tabelle `categorie`
 --
 
-DROP TABLE IF EXISTS `kategorie`;
-CREATE TABLE IF NOT EXISTS `kategorie` (
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE `categorie` (
   `id` int(11) NOT NULL,
-  `name` varchar(64) NOT NULL,
-  PRIMARY KEY (`id`)
+  `name` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `laenge`
+-- Tabellenstruktur für Tabelle `length`
 --
 
-DROP TABLE IF EXISTS `laenge`;
-CREATE TABLE IF NOT EXISTS `laenge` (
+DROP TABLE IF EXISTS `length`;
+CREATE TABLE `length` (
   `id` int(11) NOT NULL,
   `cm` int(11) NOT NULL,
-  `preis` float NOT NULL,
-  PRIMARY KEY (`id`)
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `breadId` int(11) NOT NULL,
+  `lengthId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `order_topping`
+--
+
+DROP TABLE IF EXISTS `order_topping`;
+CREATE TABLE `order_topping` (
+  `orderId` int(11) NOT NULL,
+  `toppingId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -97,13 +88,11 @@ CREATE TABLE IF NOT EXISTS `laenge` (
 --
 
 DROP TABLE IF EXISTS `topping`;
-CREATE TABLE IF NOT EXISTS `topping` (
+CREATE TABLE `topping` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `preis` float NOT NULL,
-  `kategorieId` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `kategorieId` (`kategorieId`)
+  `price` float NOT NULL,
+  `categorieId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,38 +102,135 @@ CREATE TABLE IF NOT EXISTS `topping` (
 --
 
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `vorname` varchar(64) DEFAULT NULL,
-  `name` varchar(64) DEFAULT NULL,
-  `username` varchar(64) DEFAULT NULL,
-  `passwort` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  `firstname` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Daten für Tabelle `user`
+--
+
+INSERT INTO `user` (`id`, `firstname`, `name`, `username`, `password`) VALUES
+(1, 'Max', 'Mustermann', 'sithlord', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8');
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `bread`
+--
+ALTER TABLE `bread`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `length`
+--
+ALTER TABLE `length`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`),
+  ADD KEY `breadId` (`breadId`),
+  ADD KEY `lengthId` (`lengthId`);
+
+--
+-- Indizes für die Tabelle `order_topping`
+--
+ALTER TABLE `order_topping`
+  ADD PRIMARY KEY (`orderId`,`toppingId`),
+  ADD KEY `toppingId` (`toppingId`);
+
+--
+-- Indizes für die Tabelle `topping`
+--
+ALTER TABLE `topping`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categorieId` (`categorieId`);
+
+--
+-- Indizes für die Tabelle `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `bread`
+--
+ALTER TABLE `bread`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `length`
+--
+ALTER TABLE `length`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `topping`
+--
+ALTER TABLE `topping`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints der exportierten Tabellen
 --
 
 --
--- Constraints der Tabelle `bestellung`
+-- Constraints der Tabelle `order`
 --
-ALTER TABLE `bestellung`
-  ADD CONSTRAINT `bestellung_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `bestellung_ibfk_2` FOREIGN KEY (`brotId`) REFERENCES `brot` (`id`),
-  ADD CONSTRAINT `bestellung_ibfk_3` FOREIGN KEY (`laengeId`) REFERENCES `laenge` (`id`);
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`breadId`) REFERENCES `bread` (`id`),
+  ADD CONSTRAINT `order_ibfk_3` FOREIGN KEY (`lengthId`) REFERENCES `length` (`id`);
 
 --
--- Constraints der Tabelle `bestellung_topping`
+-- Constraints der Tabelle `order_topping`
 --
-ALTER TABLE `bestellung_topping`
-  ADD CONSTRAINT `bestellung_topping_ibfk_1` FOREIGN KEY (`bestellungId`) REFERENCES `bestellung` (`id`),
-  ADD CONSTRAINT `bestellung_topping_ibfk_2` FOREIGN KEY (`toppingId`) REFERENCES `topping` (`id`);
+ALTER TABLE `order_topping`
+  ADD CONSTRAINT `order_topping_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `order_topping_ibfk_2` FOREIGN KEY (`toppingId`) REFERENCES `topping` (`id`);
 
 --
 -- Constraints der Tabelle `topping`
 --
 ALTER TABLE `topping`
-  ADD CONSTRAINT `topping_ibfk_1` FOREIGN KEY (`kategorieId`) REFERENCES `kategorie` (`id`);
+  ADD CONSTRAINT `topping_ibfk_1` FOREIGN KEY (`categorieId`) REFERENCES `categorie` (`id`);
 COMMIT;

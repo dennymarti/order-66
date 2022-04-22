@@ -4,21 +4,22 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\View\View;
+use App\Service\AuthenticationService;
 
-class authController
+class AuthController
 {
     public function index()
     {
-        $userRepository = new UserRepository();
+        AuthenticationService::login($_POST['username'], $_POST['password']);
 
-        $view = new View('user/index');
-        $view->title = 'Benutzer';
-        $view->heading = 'Benutzer';
-        $view->users = $userRepository->readAll();
-        $view->display();
+        $defaultController = new DefaultController();
+        $defaultController->index();
     }
 
-    public function logout() {
+    public function logout(){
+        AuthenticationService::logout();
 
+        $defaultController = new DefaultController();
+        $defaultController->index();
     }
 }
