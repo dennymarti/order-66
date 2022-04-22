@@ -33,7 +33,7 @@ class UserRepository extends Repository
      */
     public function create($firstName, $lastName, $email, $password)
     {
-        $password = sha1($password);
+        $password = hash('sha256', $password);
 
         $query = "INSERT INTO $this->tableName (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
 
@@ -45,5 +45,35 @@ class UserRepository extends Repository
         }
 
         return $statement->insert_id;
+    }
+
+    /**
+     * Diese Funktion gibt den Datensatz mit der gegebenen USERNAME zurück.
+     *
+     * @param $username USERNAME des gesuchten Datensatzes
+     *
+     * @throws Exception falls das Ausführen des Statements fehlschlägt
+     *
+     * @return Der gesuchte Datensatz oder null, sollte dieser nicht existieren
+     */
+    public function readByUsername($username)
+    {
+        $query = "SELECT * FROM {$this->tableName} WHERE username=?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $username);
+
+        $statement->execute();
+
+        $result = $statement->get_result();
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        $row = $result->fetch_object();
+
+        $result->close();
+
+        return $row;
     }
 }

@@ -15,6 +15,19 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="/">Bbc MVC</a>
+          <?php
+          if(isset($isLoggedIn) && $isLoggedIn) {
+              echo "<span class='text-light'>Welcome USER</span>
+                    <a class='btn btn-danger' href='/login/logout'>Logout</a>
+                    ";
+          } else {
+              echo "<form method='post' action='/auth'>
+                      <input type='text' name='username'>
+                      <input type='password' name='password'>
+                      <button type='submit'>Login</button>
+                    </form>";
+          }
+          ?>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
