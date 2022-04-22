@@ -10,10 +10,15 @@ class AuthController
 {
     public function index()
     {
-        AuthenticationService::login($_POST['username'], $_POST['password']);
+        if (AuthenticationService::login($_POST['username'], $_POST['password'])){
+            $userController = new UserController();
+            $userController->index();
+        }
+        else {
+            echo "UUPs something went wrong!";
+        }
 
-        $defaultController = new DefaultController();
-        $defaultController->index();
+
     }
 
     public function logout(){
