@@ -18,7 +18,7 @@ class authController
         $view->display();
     }
 
-    public function logout(){
+    public function logout() {
 
     }
 }
