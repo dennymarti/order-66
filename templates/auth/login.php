@@ -16,7 +16,7 @@
             </div>
 
             <p class="form-text">
-                Not registered yet? <a class="link" href="#">Signup</a>
+                Not registered yet? <a class="link" href="/auth/signup">Signup</a>
             </p>
         </div>
 

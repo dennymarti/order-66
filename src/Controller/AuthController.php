@@ -16,6 +16,22 @@ class AuthController
         $defaultController->index();
     }
 
+    public function login() {
+        $view = new View('auth/login');
+
+        $view->title = 'Login';
+        $view->heading = 'Login';
+        $view->display();
+    }
+
+    public function signup() {
+        $view = new View('auth/signup');
+
+        $view->title = 'Signup';
+        $view->heading = 'Signup';
+        $view->display();
+    }
+
     public function logout(){
         AuthenticationService::logout();
 

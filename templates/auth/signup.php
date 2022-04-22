@@ -26,7 +26,7 @@
             </div>
 
             <p class="form-text">
-                Have an account? <a class="link" href="#">Login</a>
+                Have an account? <a class="link" href="/auth/login">Login</a>
             </p>
         </div>
 
