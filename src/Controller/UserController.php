@@ -13,18 +13,20 @@ class UserController
 {
     public function index()
     {
-        AuthenticationService::restrictAuthenticated();
+        if (AuthenticationService::isAuthenticated()) {
+            $userRepository = new UserRepository();
 
-        $userRepository = new UserRepository();
+            $view = new View('user/index');
 
-        $view = new View('user/index');
+            $view->isLoggedIn = isset($_SESSION['id']);
 
-        $view->isLoggedIn = isset($_SESSION['id']);
-
-        $view->title = 'Benutzer';
-        $view->heading = 'Benutzer';
-        $view->users = $userRepository->readAll();
-        $view->display();
+            $view->title = 'Konto';
+            $view->heading = 'Konto';
+            $view->user = $userRepository->readById($_SESSION['id']);
+            $view->display();
+        } else {
+            header('Location: /auth/login');
+        }
     }
 
     public function signup() {
@@ -64,7 +66,9 @@ class UserController
         $userRepository = new UserRepository();
         $userRepository->deleteById($_GET['id']);
 
+        AuthenticationService::logout();
+
         // Anfrage an die URI /user weiterleiten (HTTP 302)
-        header('Location: /user');
+        header('Location: /');
     }
 }

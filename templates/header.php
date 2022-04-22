@@ -16,7 +16,7 @@
 
             <ul class="nav-list">
                 <a class="nav-link" href="#">Bestellen</a>
-                <a class="nav-link" href="#">Konto</a>
+                <a class="nav-link" href="/user">Konto</a>
 
                 <?php
                 if(isset($isLoggedIn) && $isLoggedIn) {

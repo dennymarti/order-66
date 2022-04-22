@@ -80,4 +80,26 @@ class UserRepository extends Repository
 
         return $row;
     }
+
+    public function readById($id)
+    {
+        $query = "SELECT * FROM {$this->tableName} WHERE id=?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('s', $id);
+
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        if (!$result) {
+            throw new Exception($statement->error);
+        }
+
+        $row = $result->fetch_object();
+
+        $result->close();
+
+        return $row;
+    }
 }
