@@ -18,7 +18,7 @@
           <?php
           if(isset($isLoggedIn) && $isLoggedIn) {
               echo "<span class='text-light'>Welcome USER</span>
-                    <a class='btn btn-danger' href='/login/logout'>Logout</a>
+                    <a class='btn btn-danger' href='/auth/logout'>Logout</a>
                     ";
           } else {
               echo "<form method='post' action='/auth'>
