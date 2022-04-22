@@ -27,32 +27,34 @@ class UserController
         $view->display();
     }
 
-    public function create()
-    {
-        AuthenticationService::restrictAuthenticated();
+    public function signup() {
+        $view = new View('user/signup');
 
-        $view = new View('user/create');
-        $view->title = 'Benutzer erstellen';
-        $view->heading = 'Benutzer erstellen';
+        $view->title = 'Signup';
+        $view->heading = 'Signup';
         $view->display();
     }
 
-    public function doCreate()
+    public function create()
     {
-        AuthenticationService::restrictAuthenticated();
-
-        if (isset($_POST['send'])) {
-            $firstName = $_POST['fname'];
-            $lastName = $_POST['lname'];
-            $email = $_POST['email'];
+        if (empty($_POST['firstname'])) {
+            header('Location: /user/signup');
+        }
+        else {
+            $firstName = $_POST['firstname'];
+            $name = $_POST['name'];
+            $username = strtolower("$firstName" . "$name");
             $password = $_POST['password'];
 
             $userRepository = new UserRepository();
-            $userRepository->create($firstName, $lastName, $email, $password);
-        }
+            $userRepository->create($firstName, $name, $username, $password);
 
-        // Anfrage an die URI /user weiterleiten (HTTP 302)
-        header('Location: /user');
+            if (AuthenticationService::login($username, $password)) {
+                header('Location: /user');
+            } else {
+                echo "UUPs something went wrong!";
+            }
+        }
     }
 
     public function delete()

@@ -2,6 +2,7 @@
 
 :root {
   --font-color: #262626;
+  --background-color: #4e67eb;
   --max-width: 975px;
 }
 
@@ -61,6 +62,21 @@ body {
   font-weight: 600;
   margin: 0;
   padding: 0;
+}
+
+.nav-button {
+  background-color: var(--background-color);
+  color: white;
+  border-radius: 1.5rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.nav-button:hover {
+  color: white;
+}
+
+.form-wrapper {
+
 }
 
 .footer {

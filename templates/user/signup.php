@@ -1,5 +1,5 @@
 <div class="form-wrapper">
-    <form class="form" method="post">
+    <form action="/user/create" class="form" method="post">
         <div class="form-header">
             <h1 class="form-title">Sign up</h1>
         </div>

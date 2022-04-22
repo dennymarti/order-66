@@ -12,9 +12,8 @@ class AuthenticationService
         // Den Benutzer anhand des Benutzernamen auslesen
 
         $userRepository = new UserRepository();
-
         $user = $userRepository->readByUsername($username);
-		
+
         if ($user != null)
         {
 			// TODO: Mitgegebenes Passwort hashen

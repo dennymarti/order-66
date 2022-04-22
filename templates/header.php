@@ -20,9 +20,9 @@
 
                 <?php
                 if(isset($isLoggedIn) && $isLoggedIn) {
-                    echo "<a class='nav-link' href='/auth/logout'>Logout</a>";
+                    echo "<a class='nav-link nav-button' href='/auth/logout'>Logout</a>";
                 } else {
-                    echo "<a class='nav-link' href='/auth/login'>Login</a>";
+                    echo "<a class='nav-link nav-button' href='/auth/login'>Login</a>";
                 }
                 ?>
             </ul>
@@ -31,8 +31,3 @@
 
     <main class="container">
         <div class="wrapper">
-            <h1><?= $heading; ?></h1>
-        </div>
-    </main>
-  </body>
-</html>

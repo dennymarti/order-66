@@ -1,7 +1,7 @@
-<div class="form-wrapper">
-    <form class="form" method="get">
+<div class="d-flex align-items-center justify-content-center">
+    <form action="/auth" class="form" method="post">
         <div class="form-header">
-            <h1 class="form-title">Login</h1>
+            <h1 class="form-title"><?= $heading; ?></h1>
         </div>
 
         <div class="form-content">
@@ -16,7 +16,7 @@
             </div>
 
             <p class="form-text">
-                Not registered yet? <a class="link" href="/auth/signup">Signup</a>
+                Not registered yet? <a class="link" href="/user/signup">Signup</a>
             </p>
         </div>
 

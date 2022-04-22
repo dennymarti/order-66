@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\Controller\AuthController;
+use App\Controller\UserController;
 use App\Database\ConnectionHandler;
+use App\Service\AuthenticationService;
 use Exception;
 
 /**
@@ -31,14 +34,14 @@ class UserRepository extends Repository
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
-    public function create($firstName, $lastName, $email, $password)
+    public function create($firstname, $name, $username, $password)
     {
-        $password = hash('sha256', $password);
+        $password_hash = hash('sha256', $password);
 
-        $query = "INSERT INTO $this->tableName (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO $this->tableName (firstname, name, username, password) VALUES (?, ?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('ssss', $firstName, $lastName, $email, $password);
+        $statement->bind_param('ssss', $firstname, $name, $username, $password_hash);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
@@ -61,11 +64,12 @@ class UserRepository extends Repository
         $query = "SELECT * FROM {$this->tableName} WHERE username=?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-        $statement->bind_param('i', $username);
+        $statement->bind_param('s', $username);
 
         $statement->execute();
 
         $result = $statement->get_result();
+
         if (!$result) {
             throw new Exception($statement->error);
         }

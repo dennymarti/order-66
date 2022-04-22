@@ -11,14 +11,11 @@ class AuthController
     public function index()
     {
         if (AuthenticationService::login($_POST['username'], $_POST['password'])){
-            $userController = new UserController();
-            $userController->index();
+            header('Location: /user');
         }
         else {
             echo "UUPs something went wrong!";
         }
-
-
     }
 
     public function login() {
@@ -29,18 +26,9 @@ class AuthController
         $view->display();
     }
 
-    public function signup() {
-        $view = new View('auth/signup');
-
-        $view->title = 'Signup';
-        $view->heading = 'Signup';
-        $view->display();
-    }
-
     public function logout(){
         AuthenticationService::logout();
 
-        $defaultController = new DefaultController();
-        $defaultController->index();
+        header('Location: /auth/login');
     }
 }
