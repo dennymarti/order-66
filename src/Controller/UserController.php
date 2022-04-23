@@ -32,8 +32,8 @@ class UserController
     public function signup() {
         $view = new View('user/signup');
 
-        $view->title = 'Signup';
-        $view->heading = 'Signup';
+        $view->title = 'Sign up';
+        $view->heading = 'Sign up';
         $view->display();
     }
 
