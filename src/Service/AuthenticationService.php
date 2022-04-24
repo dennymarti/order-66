@@ -54,9 +54,12 @@ class AuthenticationService
 
     public static function getAuthenticatedUser()
     {
+	    session_start();
+	    $userRepository = new UserRepository();
 		// TODO: User anhand der ID aus der Session auslesen
-        
+	    $user = $userRepository->readById($_SESSION['id']);
 		// TODO: User zurückgeben
+	    return $user;
     }
 
     public static function restrictAuthenticated() {
