@@ -244,6 +244,31 @@ body {
   color: var(--blue);
 }
 
+.profile-wrapper {
+  width: 380px;
+}
+
+.profile-header {
+  box-shadow: var(--box-shadow);
+  border-radius: 1.25rem;
+  padding: 1rem 0;
+  position: relative;
+  text-align: center;
+  width: 80%;
+}
+
+.profile-content {
+  text-align: center;
+}
+
+.bxs-user-circle {
+  position: relative;
+  top: 0;
+  right: 0;
+  transform: none;
+  font-size: 3rem;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
