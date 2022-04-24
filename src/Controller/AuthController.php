@@ -12,8 +12,7 @@ class AuthController
     {
         if (AuthenticationService::login($_POST['username'], $_POST['password'])){
             header('Location: /user');
-        }
-        else {
+        } else {
             echo "UUPs something went wrong!";
         }
     }

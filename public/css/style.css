@@ -39,8 +39,21 @@ body {
 }
 
 .bx {
-  font-size: 24px;
+  font-size: 20px;
   position: absolute;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 300ms;
+  right: 1rem;
+}
+
+.bxs-check-circle {
+  color: #90ee90;
+}
+
+.bxs-x-circle {
+  color: #e74c3c;
 }
 
 .container {
@@ -113,6 +126,32 @@ body {
   color: white;
 }
 
+.error-box {
+  background-color: #e74c3c;
+  border-radius: 1rem;
+  padding: 3px 8px;
+  position: absolute;
+  top: 0;
+  transition: 300ms;
+  max-width: 280px;
+}
+
+.error-box:before {
+  background-color: #e74c3c;
+  content: '';
+  height: 8px;
+  position: absolute;
+  left: 2rem;
+  bottom: -4px;
+  transform: rotate(45deg);
+  width: 8px;
+}
+
+.error-message {
+  color: white;
+  font-size: 12px;
+}
+
 .form {
   width: 380px;
 }
@@ -121,8 +160,20 @@ body {
   font-size: 2.5rem;
 }
 
-.form-field {
+.form-row {
   margin: 1rem 0;
+  position: relative;
+}
+
+.form-row.invalid {
+  padding-top: 1rem;
+}
+
+.form-row.big-alert {
+  padding-top: 2rem;
+}
+
+.form-field {
   position: relative;
   width: 100%;
 }
@@ -137,6 +188,10 @@ body {
   left: 15px;
 }
 
+.hide {
+  opacity: 0;
+}
+
 .input {
   background-color: rgba(230, 230, 230, 0.6);
   border: none;
@@ -145,6 +200,7 @@ body {
   font-weight: 500;
   outline: none;
   padding: 12px 1rem;
+  position: relative;
   transition: 300ms;
   width: 100%;
 }
