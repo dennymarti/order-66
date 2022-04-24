@@ -14,7 +14,7 @@ class UserController
     public function index()
     {
         if (AuthenticationService::isAuthenticated()) {
-            $userRepository = new UserRepository();
+//             $userRepository = new UserRepository();
 
             $view = new View('user/index');
 
@@ -22,7 +22,8 @@ class UserController
 
             $view->title = 'Konto';
             $view->heading = 'Konto';
-            $view->user = $userRepository->readById($_SESSION['id']);
+            $view->user = AuthenticationService::getAuthenticatedUser();
+//             $view->user = $userRepository->readById($_SESSION['id']);
             $view->display();
         } else {
             header('Location: /auth/login');
