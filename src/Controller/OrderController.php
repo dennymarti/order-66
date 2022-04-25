@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\LengthRepository;
+use App\Repository\ToppingRepository;
 use App\View\View;
+use App\Repository\BreadRepository;
 
 /**
  * Der Controller ist der Ort an dem es für jede Seite, welche der Benutzer
@@ -26,7 +29,7 @@ use App\View\View;
  *     - Daten welche z.B. von einem Formular kommen validieren und dem Model
  *         übergeben, damit sie in der Datenbank persistiert werden können.
  */
-class DefaultController
+class OrderController
 {
     /**
      * Die index Funktion des DefaultControllers sollte in jedem Projekt
@@ -37,13 +40,18 @@ class DefaultController
      */
     public function index()
     {
-        // In diesem Fall möchten wir dem Benutzer die View mit dem Namen
-        //   "default_index" rendern. Wie das genau funktioniert, ist in der
-        //   View Klasse beschrieben.
-        $view = new View('default/index');
+        $view = new View('order/index');
+        $view->title = 'Order';
+        $view->heading = 'Order';
 
-        $view->title = 'Startseite';
-        $view->heading = 'Startseite';
+        $breadRepository = new BreadRepository();
+        $view->breads = $breadRepository->readAll();
+
+        $lengthRepository = new LengthRepository();
+        $view->lengths = $lengthRepository->readAll();
+
+        $toppingRepository = new ToppingRepository();
+        $view->toppings = $toppingRepository->readAll();
         $view->display();
     }
 }

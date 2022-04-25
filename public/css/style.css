@@ -78,8 +78,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
+  padding: 6rem 0 2rem;
   max-width: 975px;
   width: 100vw;
 }
