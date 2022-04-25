@@ -19,13 +19,9 @@
         <p class="form-text">
             Don't need account anymore? <a class="link" href="/user/delete?id=<?= $user->id; ?>">Delete</a>
         </p>
-
-        <p class="form-text">
-            See your orders <a class="link" href="/order/show">Orders</a>
-        </p>
     </div>
 
     <div class="form-submit">
-        <button class="submit" type="button" disabled>Edit</button>
+        <button class="submit" type="button" onclick="window.location.href='/order/show'">See orders</button>
     </div>
 </div>

@@ -4,6 +4,7 @@
     </div>
 
     <div class="box">
+        <!-- getting error messages -->
         <?php
             if (isset($error)) {
                 echo "

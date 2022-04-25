@@ -1,8 +1,7 @@
     </main>
 
-    <footer class="footer"></footer>
+    <footer class="footer">&copy; 2022</footer>
 
     <script src="/js/validator.js"></script>
-    <script src="/js/select.js"></script>
 </body>
 </html>

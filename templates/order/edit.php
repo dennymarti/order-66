@@ -5,13 +5,13 @@
 
     <div class="box">
         <div class="form-row">
-            <select name="bread">
+            <select class="input" name="bread">
                 <?php
                 foreach ($breads as $bread) {
                     if ($order->breadId == $bread->id) {
-                        echo "<option value='$bread->id' selected>$bread->name</option>";
+                        echo "<option class='option' value='$bread->id' selected>$bread->name</option>";
                     } else {
-                        echo "<option value='$bread->id'>$bread->name</option>";
+                        echo "<option class='option' value='$bread->id'>$bread->name</option>";
                     }
                 }
                 ?>
@@ -20,14 +20,13 @@
 
 
         <div class="form-row">
-            <select name="length">
-                <option value="none" selected disabled hidden>Select an Option</option>
+            <select class="input" name="length">
                 <?php
                 foreach ($lengths as $length) {
                     if ($order->lengthId == $length->id) {
-                        echo "<option value='$length->id' selected>$length->cm cm</option>";
+                        echo "<option class='option' value='$length->id' selected>$length->cm cm</option>";
                     } else {
-                        echo "<option value='$length->id'>$length->cm cm</option>";
+                        echo "<option class='option' value='$length->id'>$length->cm cm</option>";
                     }
                 }
                 ?>
@@ -35,8 +34,7 @@
         </div>
 
         <div class="form-row">
-            <fieldset>
-                <legend>Topping</legend>
+            <fieldset class="input">
                 <?php
                 foreach ($toppings as $topping) {
                     $isInSandwich = false;
@@ -48,9 +46,9 @@
                     }
 
                     if ($isInSandwich) {
-                        echo "<input checked name='$topping->id' type=checkbox class='option' onclick='selectCheckbox(event)'>$topping->name</input>";
+                        echo "<label class='option'><input class='checkbox' name='$topping->id' type='checkbox' checked>$topping->name</input><i class='bx bx-check show'></i></label>";
                     } else {
-                        echo "<input name='$topping->id' type=checkbox class='option' onclick='selectCheckbox(event)'>$topping->name</input>";
+                        echo "<label class='option'><input class='checkbox' name='$topping->id' type=checkbox>$topping->name</input><i class='bx bx-check'></i></label>";
                     }
                 }
                 ?>

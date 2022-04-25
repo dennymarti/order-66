@@ -40,7 +40,7 @@ CREATE TABLE order66.topping (
 DROP TABLE IF EXISTS order66.order;
 CREATE TABLE order66.order (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    userId INTEGER NOT NULL,
+    userId INTEGER NOT NULL ON DELETE CASCADE,
     FOREIGN KEY (userId) REFERENCES `user`(id),
     breadId INTEGER NOT NULL,
     FOREIGN KEY (breadId) REFERENCES bread(id),
@@ -51,8 +51,8 @@ CREATE TABLE order66.order (
 DROP TABLE IF EXISTS order66.order_topping;
 CREATE TABLE order66.order_topping (
     orderId INTEGER NOT NULL,
-    FOREIGN KEY (orderId) REFERENCES `order`(id) ON DELETE CASCADE,
+    FOREIGN KEY (orderId) REFERENCES `order`(id) ON DELETE CASCADE ON UPDATE NO ACTION,
     toppingId INTEGER NOT NULL,
-    FOREIGN KEY (toppingId) REFERENCES topping(id) ON DELETE CASCADE,
+    FOREIGN KEY (toppingId) REFERENCES topping(id) ON DELETE CASCADE ON UPDATE NO ACTION,
     PRIMARY KEY (orderId, toppingId)
 );

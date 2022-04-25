@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
-use App\View\View;
 use App\Service\AuthenticationService;
+use App\View\View;
 
 class AuthController
 {
+    // to authenticate user with username and password and create new session id
     public function index()
     {
         $loginResult = AuthenticationService::login(htmlentities(UserController::escapeString($_POST['username'])),
@@ -25,7 +25,9 @@ class AuthController
         }
     }
 
-    public function login() {
+    // to display the login form
+    public function login()
+    {
         $view = new View('auth/login');
 
         $view->title = 'Login';
@@ -33,7 +35,9 @@ class AuthController
         $view->display();
     }
 
-    public function logout(){
+    // to destroy user session id
+    public function logout()
+    {
         AuthenticationService::logout();
 
         header('Location: /auth/login');

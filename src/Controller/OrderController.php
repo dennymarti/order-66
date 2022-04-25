@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\BreadRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\LengthRepository;
 use App\Repository\OrderRepository;
@@ -9,48 +10,18 @@ use App\Repository\OrderToppingRepository;
 use App\Repository\ToppingRepository;
 use App\Service\AuthenticationService;
 use App\View\View;
-use App\Repository\BreadRepository;
 
-/**
- * Der Controller ist der Ort an dem es für jede Seite, welche der Benutzer
- * anfordern kann eine Methode gibt, welche die dazugehörende Businesslogik
- * beherbergt.
- *
- * Welche Controller und Funktionen muss ich erstellen?
- *   Es macht sinn, zusammengehörende Funktionen (z.B: User anzeigen, erstellen,
- *   bearbeiten & löschen) gemeinsam in einem passend benannten Controller (z.B:
- *   UserController) zu implementieren. Nicht zusammengehörende Features sollten
- *   jeweils auf unterschiedliche Controller aufgeteilt werden.
- *
- * Was passiert in einer Controllerfunktion?
- *   Die Anforderungen an die einzelnen Funktionen sind sehr unterschiedlich.
- *   Folgend die gängigsten:
- *     - Dafür sorgen, dass dem Benutzer eine View (HTML, CSS & JavaScript)
- *         gesendet wird.
- *     - Daten von einem Model (Verbindungsstück zur Datenbank) anfordern und
- *         der View übergeben, damit diese Daten dann für den Benutzer in HTML
- *         Code umgewandelt werden können.
- *     - Daten welche z.B. von einem Formular kommen validieren und dem Model
- *         übergeben, damit sie in der Datenbank persistiert werden können.
- */
 class OrderController
 {
-    /**
-     * Die index Funktion des DefaultControllers sollte in jedem Projekt
-     * existieren, da diese ausgeführt wird, falls die URI des Requests leer
-     * ist. (z.B. http://my-project.local/). Weshalb das so ist, ist und wann
-     * welcher Controller und welche Methode aufgerufen wird, ist im Dispatcher
-     * beschrieben.
-     */
     public function index()
     {
+        AuthenticationService::requireLogin();
+
         $view = new View('order/index');
 
-        if (AuthenticationService::isAuthenticated()) {
-            $view->isLoggedIn = true;
-        }
         $view->title = 'Order';
         $view->heading = 'Order';
+        $view->isLoggedIn = true;
 
         $breadRepository = new BreadRepository();
         $view->breads = $breadRepository->readAll();
@@ -58,12 +29,9 @@ class OrderController
         $lengthRepository = new LengthRepository();
         $view->lengths = $lengthRepository->readAll();
 
-
         $categorieRepository = new CategorieRepository();
         $categories = $categorieRepository->readAll();
 
-        //array[cat, [toppings]]
-//        $toppingsByCat = [];
         $toppingRepository = new ToppingRepository();
         foreach ($categories as $cat) {
             $toppingsByCat[$cat->name] = [];
@@ -77,7 +45,8 @@ class OrderController
         $view->display();
     }
 
-    public function show() {
+    public function show()
+    {
         AuthenticationService::requireLogin();
 
         $view = new View('order/show');
@@ -91,7 +60,7 @@ class OrderController
 
         $toppingList = [];
 
-        foreach($view->orders as $order) {
+        foreach ($view->orders as $order) {
             $results = $orderToppingRepository->readByOrderIdResolveNames($order->id);
 
             $toppingList[$order->id] = [];
@@ -106,7 +75,8 @@ class OrderController
         $view->display();
     }
 
-    public function create() {
+    public function create()
+    {
         AuthenticationService::requireLogin();
 
         $breadId = $_POST['bread'];
@@ -125,14 +95,15 @@ class OrderController
         header('Location: /order/show');
     }
 
-    public function edit() {
+    public function edit()
+    {
         AuthenticationService::requireLogin();
 
         $id = $_GET['id'];
 
         $view = new View('/order/edit');
-        $view->title = 'Order '.$id;
-        $view->heading = 'Order '.$id;
+        $view->title = 'Order ' . $id;
+        $view->heading = 'Order ' . $id;
         $view->isLoggedIn = true;
 
         $orderRepository = new OrderRepository();
@@ -153,7 +124,8 @@ class OrderController
         $view->display();
     }
 
-    public function delete() {
+    public function delete()
+    {
         AuthenticationService::requireLogin();
 
         $orderRepository = new OrderRepository();
@@ -162,7 +134,8 @@ class OrderController
         header('Location: /order/show');
     }
 
-    public function update() {
+    public function update()
+    {
         AuthenticationService::requireLogin();
 
         $orderId = htmlentities(UserController::escapeString($_GET['id']));

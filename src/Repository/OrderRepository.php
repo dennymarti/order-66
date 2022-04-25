@@ -2,14 +2,11 @@
 
 namespace App\Repository;
 
-use App\Controller\AuthController;
-use App\Controller\OrderController;
 use App\Database\ConnectionHandler;
-use App\Service\AuthenticationService;
 use Exception;
 
 /**
- * Das UserRepository ist zuständig für alle Zugriffe auf die Tabelle "user".
+ * Das OrderRepository ist zuständig für alle Zugriffe auf die Tabelle "order".
  *
  * Die Ausführliche Dokumentation zu Repositories findest du in der Repository Klasse.
  */
@@ -27,20 +24,17 @@ class OrderRepository extends Repository
      * Das Passwort wird vor dem ausführen des Queries noch mit dem SHA1
      *  Algorythmus gehashed.
      *
-     * @param $firstName Wert für die Spalte firstName
-     * @param $lastName Wert für die Spalte lastName
-     * @param $email Wert für die Spalte email
-     * @param $password Wert für die Spalte password
+     * @param $userId Wert für die Spalte userId
+     * @param $breadId Wert für die Spalte breadId
+     * @param $lengthId Wert für die Spalte lengthId
      *
      * @throws Exception falls das Ausführen des Statements fehlschlägt
      */
     public function create($userId, $breadId, $lengthId)
     {
-
         $query = "INSERT INTO $this->tableName(`userId`, `breadId`, `lengthId`) VALUES (?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-
         $statement->bind_param('iii', $userId, $breadId, $lengthId);
 
         if (!$statement->execute()) {
@@ -78,11 +72,11 @@ class OrderRepository extends Repository
     public function readByUserIdResolveFKs($userId)
     {
         // Query erstellen
-        $query = "SELECT o.id as id, b.name as bread, l.cm as length
-                              FROM {$this->tableName} o
-                              JOIN bread b ON o.breadId = b.id
-                              JOIN length l ON o.lengthId = l.id
-                              WHERE o.userId = ?";
+        $query = "SELECT o.id as id, b.name as bread, l.cm as length 
+                                FROM {$this->tableName} o
+                                JOIN bread b ON o.breadId = b.id
+                                JOIN length l ON o.lengthId = l.id
+                                WHERE o.userId = ?";
 
         // Datenbankverbindung anfordern und, das Query "preparen" (vorbereiten)
         // und die Parameter "binden"
@@ -106,6 +100,7 @@ class OrderRepository extends Repository
         return $rows;
     }
 
+    // to delete user with his id
     public function deleteByUserId($id)
     {
         $query = "DELETE FROM {$this->tableName} WHERE userId=?";
@@ -118,11 +113,11 @@ class OrderRepository extends Repository
         }
     }
 
-    public function update($id, $breadId, $lengthId) {
+    public function update($id, $breadId, $lengthId)
+    {
         $query = "UPDATE $this->tableName SET `breadId` = $breadId, `lengthId` = $lengthId WHERE id=?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
-
         $statement->bind_param('i', $id);
 
         if (!$statement->execute()) {

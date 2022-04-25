@@ -21,6 +21,19 @@ class UriParser
         return 'Default';
     }
 
+    private static function getUriFragments()
+    {
+        // Die URI wird aus dem $_SERVER Array ausgelesen und in ihre
+        // Einzelteile zerlegt.
+        // /user/index/foo --> ['user', 'index', 'foo']
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri = strtok($uri, '?'); // Erstes ? und alles danach abschneiden
+        $uri = trim($uri, '/'); // Alle / am Anfang und am Ende der URI abschneiden
+        $uriFragments = explode('/', $uri); // In Einzelteile zerlegen
+
+        return $uriFragments;
+    }
+
     /**
      * Diese Methode wertet die Request URI aus und gibt den Actionname (Action = Methode im Controller) zurück.
      */
@@ -33,20 +46,6 @@ class UriParser
         if (!empty($uriFragments[1])) {
             $method = $uriFragments[1];
         }
-
         return $method;
-    }
-
-    private static function getUriFragments()
-    {
-        // Die URI wird aus dem $_SERVER Array ausgelesen und in ihre
-        // Einzelteile zerlegt.
-        // /user/index/foo --> ['user', 'index', 'foo']
-        $uri = $_SERVER['REQUEST_URI'];
-        $uri = strtok($uri, '?'); // Erstes ? und alles danach abschneiden
-        $uri = trim($uri, '/'); // Alle / am Anfang und am Ende der URI abschneiden
-        $uriFragments = explode('/', $uri); // In Einzelteile zerlegen
-
-        return $uriFragments;
     }
 }
