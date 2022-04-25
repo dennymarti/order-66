@@ -14,15 +14,13 @@ CREATE TABLE order66.user (
 DROP TABLE IF EXISTS order66.bread;
 CREATE TABLE order66.bread (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(64) NOT NULL,
-    price FLOAT NOT NULL
+    name VARCHAR(64) NOT NULL
 );
 
 DROP TABLE IF EXISTS order66.length;
 CREATE TABLE order66.length (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    cm INTEGER NOT NULL,
-    price FLOAT NOT NULL
+    cm INTEGER NOT NULL
 );
 
 DROP TABLE IF EXISTS order66.categorie;
@@ -35,7 +33,6 @@ DROP TABLE IF EXISTS order66.topping;
 CREATE TABLE order66.topping (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(64) NOT NULL,
-    price FLOAT NOT NULL,
     categorieId INTEGER NOT NULL,
     FOREIGN KEY (categorieId) REFERENCES categorie(id)
 );
@@ -43,7 +40,6 @@ CREATE TABLE order66.topping (
 DROP TABLE IF EXISTS order66.order;
 CREATE TABLE order66.order (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `date` DATETIME NOT NULL,
     userId INTEGER NOT NULL,
     FOREIGN KEY (userId) REFERENCES `user`(id),
     breadId INTEGER NOT NULL,
