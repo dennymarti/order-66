@@ -1,3 +1,4 @@
+// to validate names
 function validateText(event) {
     const input = event.currentTarget;
     const textPattern = '^[a-zA-Z]+$';
@@ -5,18 +6,21 @@ function validateText(event) {
     let inputName = input.name;
     let error;
 
+    // should be understandable because all input may not be blank
     if (value.length < 1) {
         error = " can't be blank.";
         setInvalid(input, inputName + error);
         return;
     }
 
+    // of course there are namens which are 2 characters long but we live in Switzerland so the shortest name would be 3 characters like Tim
     if (value.length < 3) {
         error = " must have at least 3 characters";
         setInvalid(input, inputName + error);
         return;
     }
 
+    // names doesn't have special characters and numbers except Elon Musk his new son -> R.I.P
     if (!value.match(textPattern)) {
         error = " may only contain letters";
         setInvalid(input, inputName + error);
@@ -25,6 +29,7 @@ function validateText(event) {
     setValid(input);
 }
 
+// to validate for a strong password that prevents brute force attacks
 function validatePassword(event) {
     const input = event.currentTarget;
     const passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*+-/?])(?=.{8,})';
@@ -32,20 +37,24 @@ function validatePassword(event) {
     let value = input.value;
     let error;
 
+    // should be understandable
     if (value.length < 1) {
         error = " can't be blank.";
         setInvalid(input, inputName + error);
         return;
     }
 
+    // while the confirm password input just has to compare the input of the password field,
+    // there is no need for a regex validation
     if (input.id !== 'confirmPassword') {
-        // password must have at least 8 characters to avoid brute force attacks
+        // strong passwords should be at least 8 characters long to ensure safety
         if (value.length < 8) {
             error = ' must have at least 8 characters.'
             setInvalid(input, inputName + error);
             return;
         }
 
+        // passwords should have special characters and numbers to make it mostly impossible to hack it
         if (!value.match(passwordPattern)) {
             error = ' must contain one uppercase and downcase, a number and a special character.';
             setInvalid(input, inputName + error);
@@ -61,11 +70,8 @@ function validatePassword(event) {
             }
         }
     }
+    // if everything seems to be fine the input should be visualized as valid with the setValid function
     setValid(input);
-}
-
-function updateSubmit() {
-
 }
 
 // To visualize the user that the input is valid
