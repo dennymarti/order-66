@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc478ac9-1820-48fe-9a35-28207e0e173e" name="Changes" comment="ERM">
-      <change afterPath="$PROJECT_DIR$/data/INSERTS.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/erm-order-66.vsdx" beforeDir="false" afterPath="$PROJECT_DIR$/erm-order-66.vsdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/AuthenticationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/AuthenticationService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +58,7 @@
       <workItem from="1650542045520" duration="4055000" />
       <workItem from="1650608266304" duration="14591000" />
       <workItem from="1650866569639" duration="1586000" />
-      <workItem from="1650868830045" duration="1274000" />
+      <workItem from="1650868830045" duration="3611000" />
     </task>
     <task id="LOCAL-00001" summary="ERM">
       <created>1650542804471</created>
