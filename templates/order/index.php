@@ -59,9 +59,15 @@
             <div class="form-field">
                 <fieldset>
                     <legend>Topping</legend>
-                    <?php foreach ($toppings as $topping) {
-                        echo "<input name='$topping->id' type=checkbox class='option' onclick='selectCheckbox(event)'>$topping->name</input>";
+                    <?php
+
+                    foreach ($toppingsByCat as $toppingsAndCat => $toppings) {
+                        echo "<li class='option'>$toppingsAndCat</li>";
+                        foreach ($toppings as $topping){
+                            echo "<li class='option'>$topping->name</li>";
                         }
+
+                    }
                     ?>
                 </fieldset>
             </div>

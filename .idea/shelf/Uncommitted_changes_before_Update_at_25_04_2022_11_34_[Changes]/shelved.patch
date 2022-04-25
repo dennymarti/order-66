@@ -1,0 +1,54 @@
+Index: data/INSERTS.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>INSERT INTO order66.bread (`name`, price)\r\nVALUES ('Weissbrot', 5.00),\r\n('Vollkornbrot', 5.00),\r\n('Ruchbrot', 5.00),\r\n('Nussbrot', 5.00),\r\n('Maisbrot', 5.00),\r\n('Fladenbrot', 5.50),\r\n('Olivenbrot', 6.00);\r\n\r\nINSERT INTO order66.categorie (`name`)\r\nVALUES ('Gemüse'),\r\n('Käse'),\r\n('Fleisch'),\r\n('Sauce');\r\n\r\nINSERT INTO order66.length (cm, price)\r\nVALUES (20, 0.00),\r\n(33, 3.00),\r\n(66, 10.00);\r\n\r\nINSERT INTO order66.topping (`name`, price, categorieId)\r\nVALUES ('Tomate', 0.30, 1),\r\n('Gurke', 0.30, 1),\r\n('Mais', 0.40, 1),\r\n('Oliven', 0.50, 1),\r\n('Zwiebeln', 0.20, 1),\r\n('Salat', 0.30, 1),\r\n('Blau Milch Käse', 0.60, 2),\r\n('Blauschimmel Käse', 0.70, 2),\r\n('Greyerzer', 0.50, 2),\r\n('Bacon', 0.60, 3),\r\n('Pouletslices', 0.70, 3),\r\n('Froschschenkel', 1.00, 3),\r\n('Chipotle', 0.40, 4),\r\n('Honey-Mustard', 0.40, 4),\r\n('BBQ', 0.40, 4),\r\n('Teriyaki', 0.40, 4),\r\n('Hoisin', 0.40, 4);
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/data/INSERTS.txt b/data/INSERTS.txt
+--- a/data/INSERTS.txt	(revision 9620fd23b8eca2184e0b09b94541f12f42be71c8)
++++ b/data/INSERTS.txt	(date 1650878974714)
+@@ -31,8 +31,8 @@
+ ('Bacon', 0.60, 3),
+ ('Pouletslices', 0.70, 3),
+ ('Froschschenkel', 1.00, 3),
+-('Chipotle', 0.40, 4),
+-('Honey-Mustard', 0.40, 4),
+-('BBQ', 0.40, 4),
+-('Teriyaki', 0.40, 4),
+-('Hoisin', 0.40, 4);
+\ No newline at end of file
++('Chipotle Sauce', 0.40, 4),
++('Honey-Mustard Sauce', 0.40, 4),
++('BBQ Sauce', 0.40, 4),
++('Teriyaki Sauce', 0.40, 4),
++('Hoisin Sauce', 0.40, 4);
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"dc478ac9-1820-48fe-9a35-28207e0e173e\" name=\"Changes\" comment=\"ERM\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Controller/UserController.php\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controller/UserController.php\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\" doNotAsk=\"true\" synchronizationState=\"SYNCHRONIZE\">\r\n    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>\r\n    <execution />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"PhpWorkspaceProjectConfiguration\">\r\n    <include_path>\r\n      <path value=\"$PROJECT_DIR$/vendor/composer\" />\r\n    </include_path>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"286fdNjyLnFr0iEW1M31VKr16MO\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\brichn\\Documents\\order-66\\src\\Authentication\" />\r\n      <recent name=\"C:\\Users\\brichn\\Documents\\order-66\\src\" />\r\n      <recent name=\"C:\\Users\\brichn\\Documents\\order-66\\data\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"dc478ac9-1820-48fe-9a35-28207e0e173e\" name=\"Changes\" comment=\"\" />\r\n      <created>1650542043090</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1650542043090</updated>\r\n      <workItem from=\"1650542045520\" duration=\"4055000\" />\r\n      <workItem from=\"1650608266304\" duration=\"14591000\" />\r\n      <workItem from=\"1650866569639\" duration=\"1586000\" />\r\n      <workItem from=\"1650868830045\" duration=\"3611000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"ERM\">\r\n      <created>1650542804471</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1650542804471</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"ERM\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ERM\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9620fd23b8eca2184e0b09b94541f12f42be71c8)
++++ b/.idea/workspace.xml	(date 1650879215333)
+@@ -3,7 +3,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="dc478ac9-1820-48fe-9a35-28207e0e173e" name="Changes" comment="ERM">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/data/INSERTS.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/INSERTS.txt" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -58,7 +58,7 @@
+       <workItem from="1650542045520" duration="4055000" />
+       <workItem from="1650608266304" duration="14591000" />
+       <workItem from="1650866569639" duration="1586000" />
+-      <workItem from="1650868830045" duration="3611000" />
++      <workItem from="1650868830045" duration="5068000" />
+     </task>
+     <task id="LOCAL-00001" summary="ERM">
+       <created>1650542804471</created>

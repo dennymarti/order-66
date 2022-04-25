@@ -106,4 +106,16 @@ class OrderRepository extends Repository
         }
         return $rows;
     }
+
+    public function deleteByUserId($id)
+    {
+        $query = "DELETE FROM {$this->tableName} WHERE userId=?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $id);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
 }

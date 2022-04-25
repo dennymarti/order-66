@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Database\ConnectionHandler;
+use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use App\Service\AuthenticationService;
 use App\View\View;
@@ -95,6 +96,9 @@ class UserController
 
         $userRepository = new UserRepository();
         $userRepository->deleteById($_GET['id']);
+
+        $orderRepository = new OrderRepository();
+        $orderRepository->deleteByUserId($_GET['id']);
 
         AuthenticationService::logout();
 
