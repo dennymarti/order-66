@@ -44,8 +44,12 @@
 
                 <ul class="select-menu show">
                     <?php
-                    foreach ($toppings as $topping) {
-                        echo "<li class='option'>$topping->name</li>";
+                    foreach ($toppingsByCat as $toppingsAndCat => $toppings) {
+                        echo "<li class='option'>$toppingsAndCat</li>";
+                        foreach ($toppings as $topping){
+                            echo "<li class='option'>$topping->name</li>";
+                        }
+
                     }
                     ?>
                 </ul>

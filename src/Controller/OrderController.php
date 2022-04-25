@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategorieRepository;
 use App\Repository\LengthRepository;
 use App\Repository\ToppingRepository;
 use App\View\View;
@@ -50,8 +51,22 @@ class OrderController
         $lengthRepository = new LengthRepository();
         $view->lengths = $lengthRepository->readAll();
 
+
+        $categorieRepository = new CategorieRepository();
+        $categories = $categorieRepository->readAll();
+
+        //array[cat, [toppings]]
+//        $toppingsByCat = [];
         $toppingRepository = new ToppingRepository();
-        $view->toppings = $toppingRepository->readAll();
+        foreach ($categories as $cat) {
+            $toppingsByCat[$cat->name] = [];
+            foreach ($toppingRepository->readAllByCategorie($cat->id) as $row) {
+                $toppingsByCat[$cat->name][] = $row;
+            }
+
+        }
+        $view->toppingsByCat = $toppingsByCat;
+
         $view->display();
     }
 }
