@@ -36,13 +36,12 @@ class OrderRepository extends Repository
      */
     public function create($userId, $breadId, $lengthId)
     {
-        $datetime = date('Y-m-d h-i-s');
 
-        $query = "INSERT INTO $this->tableName(`date`, `userId`, `breadId`, `lengthId`) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO $this->tableName(`userId`, `breadId`, `lengthId`) VALUES (?, ?, ?)";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
 
-        $statement->bind_param('siii', $datetime, $userId, $breadId, $lengthId);
+        $statement->bind_param('iii', $userId, $breadId, $lengthId);
 
         if (!$statement->execute()) {
             throw new Exception($statement->error);
@@ -112,6 +111,18 @@ class OrderRepository extends Repository
         $query = "DELETE FROM {$this->tableName} WHERE userId=?";
 
         $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $id);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
+
+    public function update($id, $breadId, $lengthId) {
+        $query = "UPDATE $this->tableName SET `breadId` = $breadId, `lengthId` = $lengthId WHERE id=?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+
         $statement->bind_param('i', $id);
 
         if (!$statement->execute()) {

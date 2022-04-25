@@ -157,7 +157,30 @@ class OrderController
         AuthenticationService::requireLogin();
 
         $orderRepository = new OrderRepository();
-        $orderRepository->deleteById($_GET['id']);
+        $orderRepository->deleteById(htmlentities(UserController::escapeString($_GET['id'])));
+
+        header('Location: /order/show');
+    }
+
+    public function update() {
+        AuthenticationService::requireLogin();
+
+        $orderId = htmlentities(UserController::escapeString($_GET['id']));
+        var_dump($orderId);
+        $breadId = $_POST['bread'];
+        unset($_POST['bread']);
+        $lengthId = $_POST['length'];
+        unset($_POST['length']);
+        $toppings = array_keys($_POST);
+        $userId = $_SESSION['id'];
+
+        $orderToppingRepository = new OrderToppingRepository();
+        $orderToppingRepository->deleteByOrderId($orderId);
+
+        $orderRepository = new OrderRepository();
+        $orderRepository->update($orderId, $breadId, $lengthId);
+
+        $orderToppingRepository->createMany($orderId, $toppings);
 
         header('Location: /order/show');
     }

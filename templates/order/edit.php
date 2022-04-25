@@ -1,4 +1,4 @@
-<form class="form" method="post" action="/order/update">
+<form class="form" method="post" action="/order/update?id=<?=$orderId?>">
     <div class="box">
         <h1 class="form-title"><?= $heading; ?></h1>
     </div>

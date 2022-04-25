@@ -82,4 +82,16 @@ class OrderToppingRepository extends Repository
         }
         return $rows;
     }
+
+    public function deleteByOrderId($id)
+    {
+        $query = "DELETE FROM {$this->tableName} WHERE orderId=?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $id);
+
+        if (!$statement->execute()) {
+            throw new Exception($statement->error);
+        }
+    }
 }
