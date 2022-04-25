@@ -23,7 +23,6 @@ class UserController
             $view->title = 'Konto';
             $view->heading = 'Konto';
             $view->user = AuthenticationService::getAuthenticatedUser();
-//             $view->user = $userRepository->readById($_SESSION['id']);
             $view->display();
         } else {
             header('Location: /auth/login');
