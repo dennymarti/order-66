@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Repository\LengthRepository;
+use App\Repository\OrderRepository;
+use App\Repository\OrderToppingRepository;
 use App\Repository\ToppingRepository;
+use App\Service\AuthenticationService;
 use App\View\View;
 use App\Repository\BreadRepository;
 
@@ -41,6 +44,10 @@ class OrderController
     public function index()
     {
         $view = new View('order/index');
+
+        if (AuthenticationService::isAuthenticated()) {
+            $view->isLoggedIn = true;
+        }
         $view->title = 'Order';
         $view->heading = 'Order';
 
@@ -53,5 +60,90 @@ class OrderController
         $toppingRepository = new ToppingRepository();
         $view->toppings = $toppingRepository->readAll();
         $view->display();
+    }
+
+    public function show() {
+        AuthenticationService::requireLogin();
+
+        $view = new View('order/show');
+        $view->title = 'Orders';
+        $view->heading = 'Orders';
+        $view->isLoggedIn = true;
+
+        $orderRepository = new OrderRepository();
+        $view->orders = $orderRepository->readByUserIdResolveFKs($_SESSION['id']);
+        $orderToppingRepository = new OrderToppingRepository();
+
+        $toppingList = [];
+
+        foreach($view->orders as $order) {
+            $results = $orderToppingRepository->readByOrderIdResolveNames($order->id);
+
+            $toppingList[$order->id] = [];
+
+            foreach ($results as $result) {
+                $toppingList[$order->id][] = $result->topping;
+            }
+        }
+
+        $view->toppingList = $toppingList;
+
+        $view->display();
+    }
+
+    public function create() {
+        AuthenticationService::requireLogin();
+
+        $breadId = $_POST['bread'];
+        unset($_POST['bread']);
+        $lengthId = $_POST['length'];
+        unset($_POST['length']);
+        $toppings = array_keys($_POST);
+        $userId = $_SESSION['id'];
+
+        $orderRepository = new OrderRepository();
+        $orderId = $orderRepository->create($userId, $breadId, $lengthId);
+
+        $orderToppingRepository = new OrderToppingRepository();
+        $orderToppingRepository->createMany($orderId, $toppings);
+
+        header('Location: /order/show');
+    }
+
+    public function edit() {
+        AuthenticationService::requireLogin();
+
+        $id = $_GET['id'];
+
+        $view = new View('/order/edit');
+        $view->title = 'Order '.$id;
+        $view->heading = 'Order '.$id;
+        $view->isLoggedIn = true;
+
+        $orderRepository = new OrderRepository();
+        $view->order = $orderRepository->readById($id);
+
+        $breadRepository = new BreadRepository();
+        $view->breads = $breadRepository->readAll();
+
+        $lengthRepository = new LengthRepository();
+        $view->lengths = $lengthRepository->readAll();
+
+        $toppingRepository = new ToppingRepository();
+        $view->toppings = $toppingRepository->readAll();
+
+        $orderToppingRepository = new OrderToppingRepository();
+        $view->toppingList = $orderToppingRepository->readByOrderIdResolveNames($view->order->id);
+
+        $view->display();
+    }
+
+    public function delete() {
+        AuthenticationService::requireLogin();
+
+        $orderRepository = new OrderRepository();
+        $orderRepository->deleteById($_GET['id']);
+
+        header('Location: /order/show');
     }
 }

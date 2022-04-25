@@ -19,6 +19,10 @@
         <p class="form-text">
             Don't need account anymore? <a class="link" href="/user/delete?id=<?= $user->id; ?>">Delete</a>
         </p>
+
+        <p class="form-text">
+            See your orders <a class="link" href="/order/show">Orders</a>
+        </p>
     </div>
 
     <div class="form-submit">

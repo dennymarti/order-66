@@ -16,7 +16,7 @@
             <a class="nav-title" href="/">Order 66</a>
 
             <ul class="nav-list">
-                <a class="nav-link" href="#">Order</a>
+                <a class="nav-link" href="/order">Order</a>
                 <a class="nav-link" href="/user">Account</a>
 
                 <?php

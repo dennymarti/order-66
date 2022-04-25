@@ -70,4 +70,10 @@ class AuthenticationService
             exit();
         }
     }
+
+    public static function requireLogin() {
+        if (!AuthenticationService::isAuthenticated()) {
+            header('Location: /auth/login');
+        }
+    }
 }

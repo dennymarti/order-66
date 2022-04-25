@@ -15,28 +15,16 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input autocomplete="off" class="input" id="username" name="username" type="text" onchange="validateText(event)" required>
+                <input autocomplete="off" class="input" id="username" name="username" type="text" required>
                 <label class="form-label">Username</label>
-                <i class="bx bxs-check-circle hide"></i>
-                <i class="bx bxs-x-circle hide"></i>
-            </div>
-
-            <div class="error-box hide">
-                <p class="error-message"></p>
             </div>
         </div>
 
 
         <div class="form-row">
             <div class="form-field">
-                <input autocomplete="off" class="input" id="password" name="password" type="password" onchange="validatePassword(event)" required>
+                <input autocomplete="off" class="input" id="password" name="password" type="password" required>
                 <label class="form-label">Password</label>
-                <i class="bx bxs-check-circle hide"></i>
-                <i class="bx bxs-x-circle hide"></i>
-            </div>
-
-            <div class="error-box hide">
-                <p class="error-message"></p>
             </div>
         </div>
 

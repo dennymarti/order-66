@@ -74,6 +74,10 @@ body {
   right: 1rem;
 }
 
+.bx-check {
+  font-size: 24px;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -235,6 +239,8 @@ body {
 
 .option {
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
   padding: 0.5rem 0.5rem;
   cursor: pointer;
   width: 100%;
@@ -330,7 +336,7 @@ body {
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   height: 60px;

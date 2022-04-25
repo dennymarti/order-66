@@ -28,8 +28,8 @@ function validateText(event) {
 function validatePassword(event) {
     const input = event.currentTarget;
     const passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*+-/?])(?=.{8,})';
+    let inputName = input.name.toString();
     let value = input.value;
-    let inputName = input.name;
     let error;
 
     if (value.length < 1) {
@@ -38,7 +38,7 @@ function validatePassword(event) {
         return;
     }
 
-    if (inputName !== 'confirm-password') {
+    if (input.id !== 'confirmPassword') {
         // password must have at least 8 characters to avoid brute force attacks
         if (value.length < 8) {
             error = ' must have at least 8 characters.'
@@ -56,7 +56,7 @@ function validatePassword(event) {
         if (password) {
             if (!value.match(password.value)) {
                 error = " doesn't match.";
-                setInvalid(input, inputName.replace('-', ' ') + error);
+                setInvalid(input, inputName + error);
                 return;
             }
         }

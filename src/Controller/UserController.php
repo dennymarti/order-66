@@ -18,20 +18,16 @@ class UserController
 
     public function index()
     {
-        if (AuthenticationService::isAuthenticated()) {
-//             $userRepository = new UserRepository();
+        AuthenticationService::requireLogin();
 
-            $view = new View('user/index');
+        $view = new View('user/index');
 
-            $view->isLoggedIn = true;
+        $view->isLoggedIn = true;
 
-            $view->title = 'Account';
-            $view->heading = 'Account';
-            $view->user = AuthenticationService::getAuthenticatedUser();
-            $view->display();
-        } else {
-            header('Location: /auth/login');
-        }
+        $view->title = 'Account';
+        $view->heading = 'Account';
+        $view->user = AuthenticationService::getAuthenticatedUser();
+        $view->display();
     }
 
     public function signup() {
@@ -47,10 +43,11 @@ class UserController
         $name = $_POST['name'];
         $password = $_POST['password'];
 
-        $textPattern = '^[a-zA-Z]{3,}$';
-        $passwordPattern = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*+-/?])(?=.{8,})';
+        $textPattern = "/^[a-zA-Z]{3,}$/";
+        $passwordPattern = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%&*\-+\/]).{8,}$/";
 
-        if (preg_match($textPattern, $firstName) && preg_match($textPattern, $name)) {
+        if (preg_match($textPattern, $firstName)
+            && preg_match($textPattern, $name)) {
             if (preg_match($passwordPattern, $password)) {
                 return true;
             }
@@ -84,7 +81,7 @@ class UserController
             }
         }
         else  {
-            echo "Dini Muetter isch fett und du söusch üs nid probierä zhäcke oder verarschä";
+            echo "UUPs something went wrong!";
         }
     }
 

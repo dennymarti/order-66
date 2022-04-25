@@ -45,7 +45,7 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="confirmPassword" name="confirm-password" type="password" onchange="validatePassword(event)" required>
+                <input autocomplete="off" class="input" id="confirmPassword" name="confirm password" type="password" onchange="validatePassword(event)" required>
                 <label class="form-label">Confirm password</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>

@@ -55,8 +55,8 @@ CREATE TABLE order66.order (
 DROP TABLE IF EXISTS order66.order_topping;
 CREATE TABLE order66.order_topping (
     orderId INTEGER NOT NULL,
-    FOREIGN KEY (orderId) REFERENCES `order`(id),
+    FOREIGN KEY (orderId) REFERENCES `order`(id) ON DELETE CASCADE,
     toppingId INTEGER NOT NULL,
-    FOREIGN KEY (toppingId) REFERENCES topping(id),
+    FOREIGN KEY (toppingId) REFERENCES topping(id) ON DELETE CASCADE,
     PRIMARY KEY (orderId, toppingId)
 );
