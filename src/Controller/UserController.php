@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Database\ConnectionHandler;
 use App\Repository\UserRepository;
 use App\Service\AuthenticationService;
 use App\View\View;
@@ -20,8 +21,8 @@ class UserController
 
             $view->isLoggedIn = isset($_SESSION['id']);
 
-            $view->title = 'Konto';
-            $view->heading = 'Konto';
+            $view->title = 'Account';
+            $view->heading = 'Account';
             $view->user = $userRepository->readById($_SESSION['id']);
             $view->display();
         } else {
@@ -39,24 +40,24 @@ class UserController
 
     public function create()
     {
-        if (empty($_POST['firstname'])) {
-            header('Location: /user/signup');
-        }
-        else {
-            $firstName = $_POST['firstname'];
-            $name = $_POST['name'];
-            $username = strtolower("$firstName" . "$name");
-            $password = $_POST['password'];
+        // prevent sql injections
+        $firstName = $this->escapeString($_POST['firstname']);
+        $name = $this->escapeString($_POST['name']);
+        $username = strtolower("$firstName" . "$name");
+        $password = $this->escapeString($_POST['password']);
 
-            $userRepository = new UserRepository();
-            $userRepository->create($firstName, $name, $username, $password);
+        $userRepository = new UserRepository();
+        $userRepository->create($firstName, $name, $username, $password);
 
-            if (AuthenticationService::login($username, $password)) {
-                header('Location: /user');
-            } else {
-                echo "UUPs something went wrong!";
-            }
+        if (AuthenticationService::login($username, $password)) {
+            header('Location: /user');
+        } else {
+            echo "UUPs something went wrong!";
         }
+    }
+
+    public static function escapeString($value) {
+        return mysqli_real_escape_string(ConnectionHandler::getConnection(), $value);
     }
 
     public function delete()

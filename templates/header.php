@@ -16,8 +16,8 @@
             <a class="nav-title" href="/">Order 66</a>
 
             <ul class="nav-list">
-                <a class="nav-link" href="#">Bestellen</a>
-                <a class="nav-link" href="/user">Konto</a>
+                <a class="nav-link" href="#">Order</a>
+                <a class="nav-link" href="/user">Account</a>
 
                 <?php
                 if(isset($isLoggedIn) && $isLoggedIn) {

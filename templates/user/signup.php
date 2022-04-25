@@ -6,7 +6,7 @@
     <div class="box">
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="firstname" name="firstname" type="text" required>
+                <input autocomplete="off" class="input" id="firstname" name="firstname" type="text" onchange="validateText(event)" required>
                 <label class="form-label">Firstname</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -19,7 +19,7 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="name" name="name" type="text" required>
+                <input autocomplete="off" class="input" id="name" name="name" type="text" onchange="validateText(event)" required>
                 <label class="form-label">Name</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -32,7 +32,7 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="password" name="password" type="password" required>
+                <input autocomplete="off" class="input" id="password" name="password" type="password" onchange="validatePassword(event)" required>
                 <label class="form-label">Password</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -45,7 +45,7 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="confirmPassword" name="confirm password" type="password" required>
+                <input class="input" id="confirmPassword" name="confirm-password" type="password" onchange="validatePassword(event)" required>
                 <label class="form-label">Confirm password</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -62,6 +62,6 @@
     </div>
 
     <div class="form-submit">
-        <button class="submit" id="submit" type="submit" disabled>Submit</button>
+        <button class="submit" id="submit" type="submit">Submit</button>
     </div>
 </form>

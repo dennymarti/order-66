@@ -1,4 +1,4 @@
-<div class="profile-wrapper">
+<div class="form">
     <div class="box">
         <h1 class="form-title"><?= $heading; ?></h1>
     </div>

@@ -19,6 +19,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 html {
   position: relative;
   min-height: 100%;
@@ -27,6 +31,16 @@ html {
 body {
   color: var(--font-color);
   font-family: 'Inter', sans-serif;
+}
+
+.alert-box {
+  background-color: #e74c3c;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0.25rem 0.5rem;
+  text-align: left;
 }
 
 .box {
@@ -40,20 +54,24 @@ body {
 
 .bx {
   font-size: 20px;
-  position: absolute;
   pointer-events: none;
-  top: 50%;
-  transform: translateY(-50%);
   transition: 300ms;
-  right: 1rem;
 }
 
 .bxs-check-circle {
   color: #90ee90;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 }
 
 .bxs-x-circle {
   color: #e74c3c;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 }
 
 .container {
@@ -131,6 +149,7 @@ body {
   border-radius: 1rem;
   padding: 3px 8px;
   position: absolute;
+  pointer-events: none;
   top: 0;
   transition: 300ms;
   max-width: 280px;
@@ -150,27 +169,11 @@ body {
 .error-message {
   color: white;
   font-size: 12px;
+  pointer-events: none;
 }
 
 .form {
   width: 380px;
-}
-
-.form-title {
-  font-size: 2.5rem;
-}
-
-.form-row {
-  margin: 1rem 0;
-  position: relative;
-}
-
-.form-row.invalid {
-  padding-top: 1rem;
-}
-
-.form-row.big-alert {
-  padding-top: 2rem;
 }
 
 .form-field {
@@ -186,6 +189,66 @@ body {
   transform: translateY(-50%);
   transition: 300ms;
   left: 15px;
+}
+
+.form-row {
+  margin: 1rem 0;
+  position: relative;
+}
+
+.form-row.invalid {
+  padding-top: 1rem;
+}
+
+.form-row.big-alert {
+  padding-top: 2rem;
+}
+
+.select-button {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-button label {
+  pointer-events: none;
+}
+
+.select-button.opened > i {
+  transform: rotate(180deg);
+}
+
+.select-menu {
+  background-color: rgba(230, 230, 230, 0.6);
+  border-radius: 0.5rem;
+  display: none;
+  margin-top: 1rem;
+  padding: 0.5rem 0.5rem;
+  position: relative;
+  text-align: left;
+}
+
+.select-menu.show {
+  display: block;
+}
+
+.option {
+  border-radius: 4px;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.option:hover {
+  background-color: #fafafa;
+}
+
+.form-text {
+  font-weight: 600;
+}
+
+.form-title {
+  font-size: 2.5rem;
 }
 
 .hide {
@@ -205,17 +268,13 @@ body {
   width: 100%;
 }
 
-.input:focus {
+.input:focus, .opened {
   background-color: transparent;
   box-shadow: 0 4px 10px var(--light-gray);
 }
 
 .input:valid ~ .form-label {
   display: none;
-}
-
-.form-text {
-  font-weight: 600;
 }
 
 .submit {

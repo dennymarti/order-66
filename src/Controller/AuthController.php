@@ -10,10 +10,17 @@ class AuthController
 {
     public function index()
     {
-        if (AuthenticationService::login($_POST['username'], $_POST['password'])){
+        $loginResult = AuthenticationService::login(UserController::escapeString($_POST['username']), UserController::escapeString($_POST['password']));
+
+        if ($loginResult[0]) {
             header('Location: /user');
         } else {
-            echo "UUPs something went wrong!";
+            $view = new View('auth/login');
+
+            $view->title = 'Login';
+            $view->heading = 'Login';
+            $view->error = $loginResult[1];
+            $view->display();
         }
     }
 

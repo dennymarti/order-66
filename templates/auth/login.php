@@ -4,9 +4,18 @@
     </div>
 
     <div class="box">
+        <?php
+            if (isset($error)) {
+                echo "
+<div class='alert-box'>
+    <p class='alert-message'>$error</p>
+</div>";
+            }
+        ?>
+
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="username" name="username" type="text" required>
+                <input autocomplete="off" class="input" id="username" name="username" type="text" onchange="validateText(event)" required>
                 <label class="form-label">Username</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -20,7 +29,7 @@
 
         <div class="form-row">
             <div class="form-field">
-                <input class="input" id="password" name="password" type="password" required>
+                <input autocomplete="off" class="input" id="password" name="password" type="password" onchange="validatePassword(event)" required>
                 <label class="form-label">Password</label>
                 <i class="bx bxs-check-circle hide"></i>
                 <i class="bx bxs-x-circle hide"></i>
@@ -37,6 +46,6 @@
     </div>
 
     <div class="form-submit">
-        <button class="submit" id="submit" type="submit" disabled>Submit</button>
+        <button class="submit" id="submit" type="submit">Submit</button>
     </div>
 </form>

@@ -7,31 +7,32 @@ use RuntimeException;
 
 class AuthenticationService
 {
-    public static function login($username, $password)
-    {
+    public static function login($username, $password) {
         // Den Benutzer anhand des Benutzernamen auslesen
-
         $userRepository = new UserRepository();
         $user = $userRepository->readByUsername($username);
 
-        if ($user != null)
-        {
+        if ($user != null) {
 			// TODO: Mitgegebenes Passwort hashen
             $password_hash = hash('sha256', $password);
 			
             // Prüfen ob der Password-Hash dem aus der Datenbank entspricht
-            if ($password_hash == $user->password)
-            {
+            if ($password_hash == $user->password) {
                 // Login successful
                 // TODO: User-ID in die Session schreiben
                 session_start();
                 $_SESSION['id'] = $user->id;
 
-                return true;
+                return [true];
+                $authenticationMsg = 'Successfully logged in.';
+            } else {
+                $authenticationMsg = 'Password is incorrect.';
             }
+        } else {
+            $authenticationMsg = 'Username not found.';
         }
 
-        return false;
+        return [false, $authenticationMsg];
     }
 
     public static function logout()
