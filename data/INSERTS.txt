@@ -1,0 +1,38 @@
+INSERT INTO order66.bread (`name`, price)
+VALUES ('Weissbrot', 5.00),
+('Vollkornbrot', 5.00),
+('Ruchbrot', 5.00),
+('Nussbrot', 5.00),
+('Maisbrot', 5.00),
+('Fladenbrot', 5.50),
+('Olivenbrot', 6.00);
+
+INSERT INTO order66.categorie (`name`)
+VALUES ('Gemüse'),
+('Käse'),
+('Fleisch'),
+('Sauce');
+
+INSERT INTO order66.length (cm, price)
+VALUES (20, 0.00),
+(33, 3.00),
+(66, 10.00);
+
+INSERT INTO order66.topping (`name`, price, categorieId)
+VALUES ('Tomate', 0.30, 1),
+('Gurke', 0.30, 1),
+('Mais', 0.40, 1),
+('Oliven', 0.50, 1),
+('Zwiebeln', 0.20, 1),
+('Salat', 0.30, 1),
+('Blau Milch Käse', 0.60, 2),
+('Blauschimmel Käse', 0.70, 2),
+('Greyerzer', 0.50, 2),
+('Bacon', 0.60, 3),
+('Pouletslices', 0.70, 3),
+('Froschschenkel', 1.00, 3),
+('Chipotle', 0.40, 4),
+('Honey-Mustard', 0.40, 4),
+('BBQ', 0.40, 4),
+('Teriyaki', 0.40, 4),
+('Hoisin', 0.40, 4);

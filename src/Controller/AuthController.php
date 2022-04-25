@@ -10,7 +10,8 @@ class AuthController
 {
     public function index()
     {
-        $loginResult = AuthenticationService::login(UserController::escapeString($_POST['username']), UserController::escapeString($_POST['password']));
+        $loginResult = AuthenticationService::login(htmlentities(UserController::escapeString($_POST['username'])),
+            htmlentities(UserController::escapeString($_POST['password'])));
 
         if ($loginResult[0]) {
             header('Location: /user');
